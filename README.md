@@ -14,7 +14,7 @@ Added in some more data, including the total number of passengers for domestic a
 
 I also grabbed a list of departure cities for LAX from Wikpedia (https://en.wikipedia.org/wiki/Los_Angeles_International_Airport#Airlines_and_destinations) and spent way too much time formatting the table into Ruby arrays and strings.
 
-## 2017/11/24 11:00AM:
+### 2017/11/24 11:00AM:
 
 Started classes for both domestic and international passengers and started adding attributes to them. I also started outputting sample stories even though I think ultimately, I'll have it generate all the attributes and then pick randomly from several different story templates for each type (domestic or international)
 
