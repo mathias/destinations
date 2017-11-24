@@ -247,6 +247,15 @@ class Passenger
     gender[0].capitalize
   end
 
+  def capitalized_they_are
+    case gender[0]
+    when "they"
+      "They are"
+    else
+      gender[0].capitalize + " is"
+    end
+  end
+
   def generate_mood
     case trip_purpose[0]
     when :vacation
@@ -263,9 +272,9 @@ class Passenger
   def generate_trip_purpose
     case rand
     when 0..0.33
-      [:business, 'for business']
-    when 0.34..0.49
       [:vacation, 'on a vacation']
+    when 0.34..0.50
+      [:business, 'for business']
     when 0.50..0.74
       [:family, 'to visit family']
     when 0.75..0.85
@@ -305,7 +314,7 @@ class DomesticPassenger < Passenger
       output += " #{capitalized_they} is leaving from LAX to go to #{destination}."
     end
     output += " #{name} is traveling #{trip_purpose[1]}." if rand > 0.3
-    output += " #{capitalized_they} are #{mood}." if rand > 0.3
+    output += " #{capitalized_they_are} #{mood}." if rand > 0.3
     output
   end
 end
