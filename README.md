@@ -2,6 +2,11 @@
 
 An entry to the 2017 NaNoGenMo. A novel about all the people passing through LAX on a given day.
 
+## Journal:
+
+### 2017/11/24 8AM:
+
+I begin by making a new Ruby project. At the top of the script, I'm copying in the [list of airports from the LAX website](http://www.lawa.org/LAXAirlines.aspx) and formatting it into Ruby arrays so that I can use that later as a data source. I also note the abbreviation 'TBIT' everywhere, apparently that stands for 'Tom Bradley International Terminal' so I decide that I'll have an array of expansions that I can apply randomly to expand acronyms.
 
 ## License:
 
