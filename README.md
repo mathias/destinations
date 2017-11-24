@@ -22,6 +22,12 @@ There's quite a few more details I want to procedurally generate yet, including 
 
 My data didn't work out perfectly -- I really should have separated DESTINATIONS into DOMESTIC_DESTINATIONS and INTERNATIONAL_DESTINATIONS, so that I could avoid having people "traveling domestically going to Dubai". But the data from Wikipedia wasn't split up this way, and I don't want to do all the manual work to separate out the domestic destinations from the list.
 
+Example story at this point: (one for interational and one for domestic, to illustrate):
+
+>  Eliseo Purdy is a domestic passenger. She is from Idaho. She is leaving from LAX to go to Manchester (UK). Eliseo Purdy is traveling to visit family.
+>
+>  Eleanora Wisoky is an international passenger. He is a citizen of Madagascar. Arriving from Monterrey on Aeroméxico Connect. Going to León/Del Bajío on Aeroméxico Connect.
+
 ## License:
 
 Copyright (c) 2013 Matt Gauger
