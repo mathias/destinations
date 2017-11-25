@@ -209,8 +209,85 @@ DESTINATIONS = [
   ['XL Airways France', ['Paris–Charles de Gaulle']]
 ]
 
+DOMESTIC_AIRLINES = [
+  'Alaska Airlines',
+  'Allegiant Air',
+  'American Airlines',
+  'American Eagle',
+  'Delta',
+  'Frontier',
+  'JetBlue',
+  'Southwest Airlines',
+  'Spirit Airlines',
+  'United Airlines',
+  'Virgin America'
+]
+
+DOMESTIC_DESTINATIONS = [
+  "Albuquerque",
+  "Atlanta",
+  "Austin",
+  "Baltimore",
+  "Boston",
+  "Chicago–Midway",
+  "Chicago–O'Hare",
+  "Cleveland",
+  "Dallas",
+  "Dallas/Fort Worth",
+  "Dallas–Love",
+  "Denver",
+  "Detroit",
+  "El Paso",
+  "Fort Lauderdale",
+  "Honolulu",
+  "Houston",
+  "Houston–Intercontinental",
+  "Indianapolis",
+  "Kansas City",
+  "Las Vegas",
+  "Milwaukee",
+  "Minneapolis/St. Paul",
+  "Nashville",
+  "New Orleans",
+  "New York City",
+  "Newark",
+  "Oakland",
+  "Omaha",
+  "Orlando",
+  "Philadelphia",
+  "Phoenix",
+  "Pittsburgh",
+  "Portland, Oregon",
+  "Reno/Tahoe",
+  "Sacramento",
+  "Salt Lake City",
+  "San Antonio",
+  "San Diego",
+  "San Francisco",
+  "San Jose, California",
+  "Seattle",
+  "Seattle/Tacoma",
+  "St. Louis",
+  "Tucson",
+  "Washington DC",
+  "Washington–Dulles"
+]
+
 class Passenger
-  attr_accessor :name, :originating_from_lax, :gender, :connecting, :gender, :mood, :trip_purpose, :leaving, :arriving
+  attr_accessor :name,
+    :originating_from_lax,
+    :gender,
+    :connecting,
+    :gender,
+    :mood,
+    :trip_purpose,
+    :leaving,
+    :arriving,
+    :complex_flight,
+    :layover_minutes,
+    :layover_hours,
+    :long_layover,
+    :has_layover
 
   def initialize
     @name = Faker::Name.name
@@ -222,9 +299,36 @@ class Passenger
       @arriving = true
     end
 
+    if @connecting || @leaving
+      @complex_flight = rand < 0.15 # 15% chance of flying on separate airlines
+    else
+      @complex_flight = false
+    end
+
     @gender = generate_gender
     @trip_purpose = generate_trip_purpose
     @mood = generate_mood
+
+    if @connecting
+      @has_layover = true
+
+      layover_hours = rand * 10
+      layover_hours *= rand * 5 if rand > 0.2 # 20% of the time, double or more hour layover
+
+      if layover_hours < 1.0
+        @layover_hours = 0
+        @layover_minutes = (layover_hours * 60).floor
+      else
+        @layover_hours = layover_hours.floor
+        @layover_minutes = 0
+      end
+      @long_layover = (@layover_hours > 2.0)
+    else
+      @has_layover = false
+      @layover_hours = 0
+      @layover_minutes = 0
+      @long_layover = false
+    end
   end
 
   def connecting?
@@ -253,6 +357,15 @@ class Passenger
       "They are"
     else
       gender[0].capitalize + " is"
+    end
+  end
+
+  def capitalized_they_have
+    case gender[0]
+    when "they"
+      "They have"
+    else
+      gender[0].capitalize + " has"
     end
   end
 
@@ -287,6 +400,22 @@ class Passenger
       [:secret, 'on top-secret business']
     end
   end
+
+  def has_layover?
+    has_layover
+  end
+
+  def layover_output
+    if has_layover?
+      "#{capitalized_they_have} a nice long layover of #{layover_hours} hours. "
+    else
+      if @layover_minutes < 30
+        "#{capitalized_they_have} a problem because they missed their flight."
+      else
+        "#{capitalized_they_are} in a big hurry because they only have a layover of #{layover_minutes} minutes. "
+      end
+    end
+  end
 end
 
 class DomesticPassenger < Passenger
@@ -296,25 +425,31 @@ class DomesticPassenger < Passenger
     super
     @from_state = Faker::Address.state
 
-    arrival = DESTINATIONS.sample
-    @arrival_airline = arrival[0]
-    @arriving_from = arrival[1].sample
+    @arrival_airline = DOMESTIC_AIRLINES.sample
+    @arriving_from = DOMESTIC_DESTINATIONS.sample
 
-    departure = DESTINATIONS.sample
-    @going_to_airline = departure[0]
-    @destination = departure[1].sample
+    if complex_flight
+      @going_to_airline = DOMESTIC_AIRLINES.sample
+    else
+      @going_to_airline = @arrival_airline
+    end
+    @destination = DOMESTIC_DESTINATIONS.sample
   end
 
   def run
-    output = "#{name} is a domestic passenger. #{gender[0].capitalize} is from #{from_state}."
+    output = "#{name} is a domestic passenger. #{gender[0].capitalize} is from #{from_state}. "
     if connecting?
-      output += " #{capitalized_they} is connecting through LAX, coming from #{arriving_from} and headed to #{destination}."
-      output += " #{name} is flying on #{@arrival_airline}."
+      output += "#{capitalized_they} is connecting through LAX, coming from #{arriving_from} and headed to #{destination}. "
+      output += "#{name} is flying on #{@arrival_airline}. " if rand > 0.33
     else
-      output += " #{capitalized_they} is leaving from LAX to go to #{destination}."
+      output += "#{capitalized_they} is leaving from LAX to go to #{destination}. "
     end
-    output += " #{name} is traveling #{trip_purpose[1]}." if rand > 0.3
-    output += " #{capitalized_they_are} #{mood}." if rand > 0.3
+    if rand > 0.33
+      output += (rand > 0.5) ? "#{name} is" : capitalized_they_are
+      output += " traveling #{trip_purpose[1]}. "
+    end
+    output += "#{capitalized_they_are} #{mood}. " if rand > 0.3
+    output += layover_output
     output
   end
 end
@@ -330,7 +465,6 @@ class InternationalPassenger < Passenger
     @arrival_airline = arrival[0]
     @arriving_from = arrival[1].sample
 
-    complex_flight = rand < 0.15 # 15% chance of flying on separate airlines
     if complex_flight
       departure = DESTINATIONS.sample
       @going_to_airline = departure[0]
@@ -342,14 +476,22 @@ class InternationalPassenger < Passenger
   end
 
   def run
-    output = "#{@name} is an international passenger."
-    output += " #{capitalized_they} is a citizen of #{@country_of_origin}."
+    output = "#{@name} is an international passenger. "
+    output += "#{capitalized_they} is a citizen of #{@country_of_origin}. "
 
     if connecting?
-      output += " Arriving from #{@arriving_from} on #{@arrival_airline}. Going to #{@going_to_city} on #{@going_to_airline}."
+      output += "Arriving from #{@arriving_from} on #{@arrival_airline}. Going to #{@going_to_city}"
+      if @going_to_airline != @arrival_airline
+        output += " on #{@going_to_airline}."
+        output != "#{capitalized_they} saved money by booking this complex flight across airlines. " if rand > 0.33
+      else
+        output += ". "
+      end
     else
-      output += " #{capitalized_they} is leaving from LAX to travel to #{@going_to_city} on #{@going_to_airline}."
+      output += "#{capitalized_they} is leaving from LAX to travel to #{@going_to_city} on #{@going_to_airline}. "
     end
+
+    output += layover_output
     output
   end
 end
@@ -358,12 +500,12 @@ end
 # First of all, is this passenger a domestic or international passenger?
 
 def generate_passenger_stories
-  10.times do |i|
+  10.times do
     domestic_or_international = rand
     if domestic_or_international < CHANCE_DOMESTIC
-      puts DomesticPassenger.new.run
+      puts DomesticPassenger.new.run + "\n"
     else
-      puts InternationalPassenger.new.run
+      puts InternationalPassenger.new.run + "\n"
     end
   end
 end

@@ -28,6 +28,14 @@ Example story at this point: (one for interational and one for domestic, to illu
 >
 >  Eleanora Wisoky is an international passenger. He is a citizen of Madagascar. Arriving from Monterrey on Aeroméxico Connect. Going to León/Del Bajío on Aeroméxico Connect.
 
+### 2017/11/25 10:00AM:
+
+I spent anouther hour on this, this morning. I did the work to break out domestic destinations and domestic airlines, but I didn't try to map them 1:1 -- basically, any domestic passenger can take any domestic airline to anywhere in the US, right now. That seems fine. I don't need it to be 100% accurate.
+
+I also added in a little bit of logic over whether they have a layover, if they do, whether they've got a long layover, a short one, or they've missed their flight.
+
+There feels like a lot of room for improvement. Each passenger's story is still only around 40 words per passenger, and they are very repetitive. I also think the code isn't super great, since it there's only a little re-use between the classes, and a lot of arbitrary attributes generated and used. It'd be nice if it all was built more like a decision tree, but I don't want to make one function/method with a giant if-else nested mess.
+
 ## License:
 
 Copyright (c) 2013 Matt Gauger
