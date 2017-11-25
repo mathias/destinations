@@ -405,12 +405,22 @@ class Passenger
     has_layover
   end
 
+  def long_layover?
+    long_layover
+  end
+
   def layover_output
-    if has_layover?
-      "#{capitalized_they_have} a nice long layover of #{layover_hours} hours. "
+    return '' unless has_layover?
+
+    if long_layover?
+      if layover_hours > 24
+        "#{capitalized_they_have} an incredibly long layover of #{layover_hours} hours. Time to get some sleep? "
+      else
+        "#{capitalized_they_have} a nice long layover of #{layover_hours} hours. "
+      end
     else
-      if @layover_minutes < 30
-        "#{capitalized_they_have} a problem because they missed their flight."
+      if layover_minutes < 30
+        "#{capitalized_they_have} a problem because they missed their flight. "
       else
         "#{capitalized_they_are} in a big hurry because they only have a layover of #{layover_minutes} minutes. "
       end
@@ -482,7 +492,7 @@ class InternationalPassenger < Passenger
     if connecting?
       output += "Arriving from #{@arriving_from} on #{@arrival_airline}. Going to #{@going_to_city}"
       if @going_to_airline != @arrival_airline
-        output += " on #{@going_to_airline}."
+        output += " on #{@going_to_airline}. "
         output != "#{capitalized_they} saved money by booking this complex flight across airlines. " if rand > 0.33
       else
         output += ". "
