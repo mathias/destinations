@@ -339,11 +339,11 @@ class Passenger
   def generate_gender
     case rand
     when 0..0.49
-      ["she", "her", "hers"]
+      ["she", "her", "her"]
     when 0.50..0.99
       ["he", "him", "his"]
     else
-      ["they", "them", "theirs"]
+      ["they", "them", "their"]
     end
   end
 
@@ -412,19 +412,30 @@ class Passenger
   def layover_output
     return '' unless has_layover?
 
+    output = ''
     if long_layover?
       if layover_hours > 24
-        "#{capitalized_they_have} an incredibly long layover of #{layover_hours} hours. Time to get some sleep? "
+        output += "#{capitalized_they_have} an incredibly long layover of #{layover_hours} hours. "
+        case rand
+        when 0..0.4
+          output += "Time to get some sleep? "
+        when 0.4..0.9
+          output += "Perhaps there is an open restaurant to eat at? "
+        else
+          output += "#{capitalized_they} break down #{['crying', 'laughing', 'sobbing', 'sneezing'].sample} at the thought of being here that long. "
+        end
       else
-        "#{capitalized_they_have} a nice long layover of #{layover_hours} hours. "
+        output += "#{capitalized_they_have} a #{['nice', 'convenient', 'boring', 'comfortable'].sample} layover of #{layover_hours} hours. "
       end
     else
       if layover_minutes < 30
-        "#{capitalized_they_have} a problem because they missed their flight. "
+        output += "#{capitalized_they_have} a problem because #{gender[0]} missed #{gender[2]} flight. "
       else
-        "#{capitalized_they_are} in a big hurry because they only have a layover of #{layover_minutes} minutes. "
+        output += "#{capitalized_they_are} in a big hurry because #{gender[0]} only have a layover of #{layover_minutes} minutes. "
       end
     end
+
+    output
   end
 end
 
