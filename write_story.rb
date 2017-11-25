@@ -153,7 +153,7 @@ class Passenger
         when 0.4..0.9
           output += "Perhaps there is an open restaurant to eat at? "
         else
-          output += "#{capitalized_they} break down #{['crying', 'laughing', 'sobbing', 'sneezing'].sample} at the thought of being here that long. "
+          output += "#{capitalized_they} begins #{['crying', 'laughing', 'sobbing', 'sneezing'].sample} at the thought of being here that long. "
         end
       else
         output += "#{capitalized_they_have} a #{['nice', 'convenient', 'boring', 'comfortable'].sample} layover of #{layover_hours} hours. "
