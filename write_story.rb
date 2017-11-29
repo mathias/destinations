@@ -280,14 +280,18 @@ end
 # Begin generating passengers:
 # First of all, is this passenger a domestic or international passenger?
 
+def generate_passenger
+  domestic_or_international = rand
+  if domestic_or_international < CHANCE_DOMESTIC
+    puts DomesticPassenger.new.run + "\n"
+  else
+    puts InternationalPassenger.new.run + "\n"
+  end
+end
+
 def generate_passenger_stories
   10.times do
-    domestic_or_international = rand
-    if domestic_or_international < CHANCE_DOMESTIC
-      puts DomesticPassenger.new.run + "\n"
-    else
-      puts InternationalPassenger.new.run + "\n"
-    end
+    generate_passenger
   end
 end
 
