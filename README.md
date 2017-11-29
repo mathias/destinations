@@ -44,7 +44,7 @@ Overall, these aren't very compelling stories, but the generator does work. Exam
 
 > Mr. Hilbert Jacobi is a domestic passenger. She is from Minnesota. She is connecting through LAX, coming from Houston and headed to Chicago–Midway. She has an incredibly long layover of 20 hours. Perhaps there is an open restaurant to eat at?
 > Ms. Lizeth Smitham is an international passenger. She is a citizen of Tokelau. Arriving from Riyadh on Saudia. Going to Jeddah. She has to wait for a bus between terminals. Why won't anyone help them find where to go? She has an incredibly long layover of 19 hours.
-> Tyrel Ward is a domestic passenger. He is from Arizona. He is leaving from LAX to go to Milwaukee. Tyrel Ward is traveling on a vacation. He is is going to take a rental car from the airport.
+> Solon Cummerata is a domestic passenger. She is from Hawaii. She is arriving from Baltimore. She is traveling on a vacation. She is sunburned. She is is going to take the FlyAway bus from the airport.
 
 ## License:
 
