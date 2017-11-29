@@ -18,7 +18,8 @@ class Passenger
     :layover_minutes,
     :layover_hours,
     :long_layover,
-    :has_layover
+    :has_layover,
+    :ground_transportation
 
   def initialize
     @name = Faker::Name.name
@@ -60,6 +61,8 @@ class Passenger
       @layover_minutes = 0
       @long_layover = false
     end
+
+    @ground_transportation = generate_ground_transportation
   end
 
   def connecting?
@@ -168,6 +171,21 @@ class Passenger
 
     output
   end
+
+  def generate_ground_transportation
+    if !connecting && arriving
+      LOCAL_TRANSPORTATION.sample
+    end
+  end
+
+  def ground_transportation_output
+    output = ''
+    if ground_transportation
+      output += "#{capitalized_they_are} is going to take #{ground_transportation} from the airport. "
+      output += "Their ride is late. " if rand > 0.8
+    end
+    output
+  end
 end
 
 class DomesticPassenger < Passenger
@@ -202,6 +220,7 @@ class DomesticPassenger < Passenger
     end
     output += "#{capitalized_they_are} #{mood}. " if rand > 0.3
     output += layover_output
+    output += ground_transportation_output
     output
   end
 end
@@ -255,6 +274,7 @@ class InternationalPassenger < Passenger
     end
 
     output += layover_output
+    output += ground_transportation_output
     output
   end
 end

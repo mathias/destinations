@@ -18,18 +18,18 @@ module LaxData
   LAX_RENTAL_CARS_PER_YEAR = 273881.0
 
   LOCAL_TRANSPORTATION = [
-    'LAX Shuttle',
-    'FlyAway Bus',
-    'Hotel Shuttle',
-    'Shared Ride Van',
-    'City Bus',
-    'Rental car',
-    'Taxi',
-    'Lyft',
-    'Uber',
-    'friend\'s car',
-    'limo'
-  ]
+    'the LAX shuttle',
+    'the FlyAway bus',
+    'a hotel shuttle',
+    'a shared ride van',
+    'a city bus',
+    'a rental car',
+    'a taxi',
+    'a Lyft',
+    'an Uber',
+    'a friend\'s car',
+    'a limo'
+  ].compact
 
   # From https://en.wikipedia.org/wiki/Los_Angeles_International_Airport
   LAX_HUB_FOR = [
