@@ -1,6 +1,6 @@
 # Departures and Arrivals
 
-An entry to the 2017 NaNoGenMo. A novel about all the people passing through LAX on a given day.
+An entry to the [2017 NaNoGenMo](https://github.com/NaNoGenMo/2017/issues/). A novel about all the people passing through LAX on a given day.
 
 ## Journal:
 
@@ -10,9 +10,9 @@ I begin by making a new Ruby project. At the top of the script, I'm copying in t
 
 ### 2017/11/24 9:15AM:
 
-Added in some more data, including the total number of passengers for domestic and international flights in September 2017, so that I can calculate percentages that a passenger is on an international or domestic flight and procedurally generate. (based on http://www.lawa.org/uploadedfiles/LAX/statistics/tcom-0917.pdf )
+Added in some more data, including the total number of passengers for domestic and international flights in September 2017, so that I can calculate percentages that a passenger is on an international or domestic flight and procedurally generate. (based on <http://www.lawa.org/uploadedfiles/LAX/statistics/tcom-0917.pdf> )
 
-I also grabbed a list of departure cities for LAX from Wikpedia (https://en.wikipedia.org/wiki/Los_Angeles_International_Airport#Airlines_and_destinations) and spent way too much time formatting the table into Ruby arrays and strings.
+I also grabbed a list of departure cities for [LAX from Wikpedia](https://en.wikipedia.org/wiki/Los_Angeles_International_Airport#Airlines_and_destinations) and spent way too much time formatting the table into Ruby arrays and strings.
 
 ### 2017/11/24 11:00AM:
 
