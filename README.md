@@ -36,6 +36,16 @@ I also added in a little bit of logic over whether they have a layover, if they 
 
 There feels like a lot of room for improvement. Each passenger's story is still only around 40 words per passenger, and they are very repetitive. I also think the code isn't super great, since it there's only a little re-use between the classes, and a lot of arbitrary attributes generated and used. It'd be nice if it all was built more like a decision tree, but I don't want to make one function/method with a giant if-else nested mess.
 
+### 2017/11/28 7:30PM:
+
+Running out of time to work on this. I added in ground transportation for passengers that are arriving and not connecting to another flight.
+
+Overall, these aren't very compelling stories, but the generator does work. Example output:
+
+> Mr. Hilbert Jacobi is a domestic passenger. She is from Minnesota. She is connecting through LAX, coming from Houston and headed to Chicago–Midway. She has an incredibly long layover of 20 hours. Perhaps there is an open restaurant to eat at?
+> Ms. Lizeth Smitham is an international passenger. She is a citizen of Tokelau. Arriving from Riyadh on Saudia. Going to Jeddah. She has to wait for a bus between terminals. Why won't anyone help them find where to go? She has an incredibly long layover of 19 hours.
+> Tyrel Ward is a domestic passenger. He is from Arizona. He is leaving from LAX to go to Milwaukee. Tyrel Ward is traveling on a vacation. He is is going to take a rental car from the airport.
+
 ## License:
 
 Copyright (c) 2013 Matt Gauger

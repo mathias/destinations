@@ -24,12 +24,8 @@ class Passenger
   def initialize
     @name = Faker::Name.name
     @connecting = rand < CHANCE_ORIGINATING_FROM_LAX
-    if !@connecting
-      @leaving = rand < 0.50
-      @arriving = !leaving
-    else
-      @arriving = true
-    end
+    @leaving = rand < 0.50
+    @arriving = !leaving
 
     if @connecting || @leaving
       @complex_flight = rand < 0.15 # 15% chance of flying on separate airlines
@@ -173,7 +169,7 @@ class Passenger
   end
 
   def generate_ground_transportation
-    if !connecting && arriving
+    if arriving && !connecting
       LOCAL_TRANSPORTATION.sample
     end
   end
@@ -211,6 +207,8 @@ class DomesticPassenger < Passenger
     if connecting?
       output += "#{capitalized_they} is connecting through LAX, coming from #{arriving_from} and headed to #{destination}. "
       output += "#{name} is flying on #{@arrival_airline}. " if rand > 0.33
+    elsif arriving
+      output += "#{capitalized_they} is arriving from #{arriving_from}. "
     else
       output += "#{capitalized_they} is leaving from LAX to go to #{destination}. "
     end
