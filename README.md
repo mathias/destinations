@@ -2,6 +2,8 @@
 
 An entry to the [2017 NaNoGenMo](https://github.com/NaNoGenMo/2017/issues/). A novel about all the people passing through LAX on a given day.
 
+Output is in https://github.com/mathias/destinations/blob/master/departures.md
+
 ## Journal:
 
 ### 2017/11/24 8AM:
