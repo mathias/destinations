@@ -46,6 +46,10 @@ Overall, these aren't very compelling stories, but the generator does work. Exam
 > Ms. Lizeth Smitham is an international passenger. She is a citizen of Tokelau. Arriving from Riyadh on Saudia. Going to Jeddah. She has to wait for a bus between terminals. Why won't anyone help them find where to go? She has an incredibly long layover of 19 hours.
 > Solon Cummerata is a domestic passenger. She is from Hawaii. She is arriving from Baltimore. She is traveling on a vacation. She is sunburned. She is is going to take the FlyAway bus from the airport.
 
+### 2017/11/28 8:00PM:
+
+Actually wrote the code to generate the `departures.txt` output file. It loops with while until it has generated at least 50,000 words. Seems to work OK. Output still isn't as far along as I was hoping for, but I'll call it done for now.
+
 ## License:
 
 Copyright (c) 2013 Matt Gauger
