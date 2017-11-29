@@ -283,16 +283,32 @@ end
 def generate_passenger
   domestic_or_international = rand
   if domestic_or_international < CHANCE_DOMESTIC
-    puts DomesticPassenger.new.run + "\n"
+    DomesticPassenger.new.run
   else
-    puts InternationalPassenger.new.run + "\n"
+    InternationalPassenger.new.run
   end
 end
 
 def generate_passenger_stories
   10.times do
-    generate_passenger
+    puts generate_passenger
   end
 end
 
-generate_passenger_stories
+if ARGV.include?('--generate')
+  words = 0
+  File.open('departures.txt', 'w') do |file|
+    # Make the book
+    file.write "# Departures and Arrivals\n"
+    file.write "\n"
+    file.write "An ode to LAX.\n"
+    file.write "\n"
+    while words < 50_000
+      story = generate_passenger.chop
+      file.write story
+      file.write "\n\n"
+      words += story.split(' ').count
+    end
+  end
+end
+
