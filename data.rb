@@ -1,4 +1,3 @@
-
 module LaxData
   # From http://www.lawa.org/uploadedfiles/LAX/statistics/tcom-0917.pdf
   #PASSENGER_TRAFFIC_TOTALS_SEPT_2017 = [

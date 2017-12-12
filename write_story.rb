@@ -311,4 +311,3 @@ if ARGV.include?('--generate')
     end
   end
 end
-
